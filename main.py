@@ -10,7 +10,12 @@ from PyQt5.QtWidgets import (
     QApplication,
     QGridLayout
 )
-from PyQt5.QtGui import QFont, QFontDatabase, QPixmap
+from PyQt5.QtGui import (
+    QFont,
+    QFontDatabase,
+    QPixmap,
+    QIcon
+)
 
 
 FINALCOUNTDOWN = 11
@@ -26,6 +31,7 @@ class Game(QMainWindow):
     def initUI(self):
         # Initialize the game window and set up the game state
         self.load_font()
+
         uic.loadUi("ui-files/game_window.ui", self)
         self.setFixedSize(900, 750)
         self.db = sqlite3.connect("abc.sqlite")
@@ -40,9 +46,13 @@ class Game(QMainWindow):
         self.false_answer = 0
 
         self.create_keyboard()
-
+        self.window_title()
         self.choise_word()
         self.translate_word()
+
+    def window_title(self):
+        self.setWindowTitle("Виселица")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
     def load_font(self):
         font_id = QFontDatabase.addApplicationFont("font/troika.otf")
@@ -210,6 +220,8 @@ class FinalGame(QDialog):
     def initUI(self, t, f):
         uic.loadUi("ui-files/final_game_window.ui", self)
 
+        self.window_title()
+
         pixmap_t = QPixmap("pict/True.png")
         pixmap_f = QPixmap("pict/False.png")
 
@@ -218,6 +230,10 @@ class FinalGame(QDialog):
 
         self.true_count.setText(str(t))
         self.false_count.setText(str(f))
+
+    def window_title(self):
+        self.setWindowTitle("Конец игры")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
 
 class AnswerT(QDialog):
@@ -229,10 +245,16 @@ class AnswerT(QDialog):
     def initUI(self, word):
         uic.loadUi("ui-files/answer_window.ui", self)
 
+        self.window_title()
+
         pixmap = QPixmap("pict/win.png")
         self.pict_label.setPixmap(pixmap)
 
         self.text_label.setText(word)
+
+    def window_title(self):
+        self.setWindowTitle("Правильно")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
 
 class AnswerF(QDialog):
@@ -244,10 +266,16 @@ class AnswerF(QDialog):
     def initUI(self, word):
         uic.loadUi("ui-files/answer_window.ui", self)
 
+        self.window_title()
+
         pixmap = QPixmap("pict/loose.png")
         self.pict_label.setPixmap(pixmap)
 
         self.text_label.setText(word)
+
+    def window_title(self):
+        self.setWindowTitle("Неправильно")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
 
 class Menu(QMainWindow):
@@ -260,6 +288,9 @@ class Menu(QMainWindow):
         self.load_font()
         self.show()
         uic.loadUi("ui-files/menu_window.ui", self)
+
+        self.window_title()
+
         self.setFixedSize(800, 600)
 
         self.draw_menu()
@@ -267,6 +298,10 @@ class Menu(QMainWindow):
         self.play_btn.clicked.connect(self.open_game)
         self.settings_btn.clicked.connect(self.open_settings)
         self.about_btn.clicked.connect(self.open_about)
+
+    def window_title(self):
+        self.setWindowTitle("Меню")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
     def load_font(self):
         font_id = QFontDatabase.addApplicationFont("font/troika.otf")
@@ -302,6 +337,9 @@ class Settings(QDialog):
 
     def initUI(self):
         uic.loadUi("ui-files/settings_window.ui", self)
+
+        self.window_title()
+
         self.ok_btn.clicked.connect(self.save_settings)
 
     def save_settings(self):
@@ -309,6 +347,10 @@ class Settings(QDialog):
         limit_hints = self.number_hints.value()
         limit_words = self.limit_word.value()
         self.close()
+
+    def window_title(self):
+        self.setWindowTitle("Настройки")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
 
 class About(QDialog):
@@ -320,8 +362,14 @@ class About(QDialog):
         uic.loadUi("ui-files/about_window.ui", self)
         self.setFixedSize(400, 400)
 
+        self.window_title()
+
         pixmap = QPixmap("pict/about.png")
         self.label.setPixmap(pixmap)
+
+    def window_title(self):
+        self.setWindowTitle("Об игре")
+        self.setWindowIcon(QIcon("pict/11.png"))
 
 
 if __name__ == "__main__":
