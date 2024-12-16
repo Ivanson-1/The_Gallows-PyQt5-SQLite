@@ -43,6 +43,6 @@
 - `abc.sqlite`: База данных с доступными словами.
 
 ## Скриншоты
-![МЕНЮ](files/menu.png)
-![ИГРА](files/gameplay.png)
-![НАСТРОЙКИ](files/settings.png)
+![МЕНЮ](pict/files/menu.png)
+![ИГРА](pict/files/gameplay.png)
+![НАСТРОЙКИ](pict/files/settings.png)
