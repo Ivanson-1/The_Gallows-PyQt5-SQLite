@@ -31,7 +31,7 @@
    python main.py
    ```
 
-## Зависимости
+## Технологии
 - PyQt5
 - SQLite
 - Python 3.9+
